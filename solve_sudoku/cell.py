@@ -1,8 +1,10 @@
+
 from __future__ import annotations
 from candidates import Candidates
 
 
 class Cell:
+    '''this is a cell in the sudoku board'''
     def __init__(
         self, row: int, col: int, block: int, value: int, candidates: Candidates
     ):

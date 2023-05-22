@@ -1,8 +1,8 @@
 from __future__ import annotations
 import copy
 from cell import Cell
-from typing import Literal, Type, Union
-from colorama import Fore, Back, Style
+from typing import Union
+from colorama import Back
 from candidates import Candidates
 
 
@@ -71,7 +71,7 @@ def parsecellvalue(char: str) -> int:
     raise ValueError(f"I am not expecting somethign like: {char}")
 
 
-def make_board2(
+def make_board2 (
     board: list[Cell], empty_cells: list[Cell], cell_i_tried: Cell
 ) -> Boardcheckpoint:
     s_board = Boardcheckpoint(board, empty_cells, cell_i_tried, [])
@@ -139,8 +139,7 @@ def find_empty_cell(board: list[Cell]) -> Union[Cell, bool]:
         cell = board[i]
         if cell.value == 0:
             return cell
-    else:
-        return True
+    return True
 
 
 def find_all_empty_cells(board: list[Cell]) -> list[Cell]:
@@ -156,7 +155,8 @@ def print_solution(solution: Union[list[Cell], str]):
     if type(solution) == list[Cell]:
         color_board(solution)
     else:
-        print(solution)
+        print_board(solution)
+
 
 
 def fetch_cells(board: list[Cell]) -> list[Cell]:
@@ -178,7 +178,7 @@ def find_lowest_number_of_candidates(empty_cells: list[Cell]) -> Cell:
     raise ValueError("something bad happened")
 
 
-def color_board(board: list[Cell]):
+def color_board(board: list[Cell]) -> str:
     dict_of_cells = get_all_candidates_for_empty_cells(board)
     if dict_of_cells == None:
         print_board(board)
@@ -203,7 +203,9 @@ def color_board(board: list[Cell]):
                 case _:
                     color = Back.RESET
 
-        print(color + "." + Back.RESET if v == 0 else v, end=" ")
+        result = print(color + "." + Back.RESET if v == 0 else v, end=" ")
+
+        return result
 
 
 def get_all_candidates_for_empty_cells(board: list[Cell]) -> dict[Cell, list[int]]:
@@ -222,3 +224,5 @@ def are_candidates_valid(empty_cells: list[Cell]) -> bool:
         if len(empty_cell.candidates.candidates) == 0:
             return False
     return True
+
+
