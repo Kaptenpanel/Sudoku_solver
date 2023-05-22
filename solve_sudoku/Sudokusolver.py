@@ -1,15 +1,19 @@
 # new sudoku file
 
 from cell import Cell
+from boardd import (
+    Boardcheckpoint,
+    print_solution,
+    makeboard,
+    make_board2,
+    fetch_cells,
+    find_lowest_number_of_candidates,
+    are_candidates_valid,
+)
 
-from cell import Cell
-from boardd import Boardcheckpoint, print_solution, makeboard, make_board2, fetch_cells, find_lowest_number_of_candidates, are_candidates_valid
 
-
-
-        
-def solve_board(board:list[Cell]): 
-    saved_boards:list[Boardcheckpoint] = []
+def solve_board(board: list[Cell]):
+    saved_boards: list[Boardcheckpoint] = []
     for _ in range(10000000):
         empty_cells = fetch_cells(board)
         if len(empty_cells) == 0:
@@ -19,12 +23,12 @@ def solve_board(board:list[Cell]):
                 return "THE SUDOKU BOARD CANNOT BE SOLVED"
             else:
                 board = saved_boards[-1].board
-                saved_boards[-1].try_again = True        
+                saved_boards[-1].try_again = True
                 empty_cells = fetch_cells(board)
         good_cell = find_lowest_number_of_candidates(empty_cells)
-        if len(good_cell.candidates.candidates)==1:
+        if len(good_cell.candidates.candidates) == 1:
             good_cell.value = good_cell.candidates.candidates[0]
-        elif len(good_cell.candidates.candidates)==0:
+        elif len(good_cell.candidates.candidates) == 0:
             saved_boards.pop(-1)
             continue
         else:
@@ -40,32 +44,6 @@ def solve_board(board:list[Cell]):
             good_cell.value = good_cell.candidates.candidates[0]
             saved_board.attempts.append(good_cell.value)
             saved_boards.append(saved_board)
-        
-            if len(saved_boards) > 81:
-                raise ValueError("something bad has happend")
-            
-        
-
-
-        
-            
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 original = (
@@ -74,31 +52,23 @@ original = (
 
 
 hard_case = (
-    '........1.5...89...42...3.85...3.1.2..8.25.........45..19...27....7.2....8.....13'
+    "........1.5...89...42...3.85...3.1.2..8.25.........45..19...27....7.2....8.....13"
 )
 
 hard_case2 = (
-    '.....8......5...9...5.397.2.1.945.............2.7.....7.......9..3.2..474.....21.'
+    ".....8......5...9...5.397.2.1.945.............2.7.....7.......9..3.2..474.....21."
 )
 
 almost_unsolvable = (
-    '..64..7..2....1.9.....8.....1..2..8.7.......4..3...5.......3..6..57.....9......2.'
+    "..64..7..2....1.9.....8.....1..2..8.7.......4..3...5.......3..6..57.....9......2."
 )
 
 
 unsolvable = (
-    '2..9............6......1...5.26..4.7.....41......98.23.....3.8...5.1......7......'
+    "2..9............6......1...5.26..4.7.....41......98.23.....3.8...5.1......7......"
 )
 
 board = makeboard(hard_case2)
 solution = solve_board(board)
 
 print_solution(solution)
-
-
-
-
-
-
-
-    

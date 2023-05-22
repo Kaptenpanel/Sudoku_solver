@@ -3,7 +3,9 @@ from candidates import Candidates
 
 
 class Cell:
-    def __init__(self, row: int, col: int, block: int, value: int, candidates:Candidates):
+    def __init__(
+        self, row: int, col: int, block: int, value: int, candidates: Candidates
+    ):
         self.row = row
         self.col = col
         self.block = block
@@ -15,7 +17,7 @@ class Cell:
             "("
             + "r:"
             + str(self.row)
-            + "," 
+            + ","
             + "c:"
             + str(self.col)
             + ","
@@ -28,9 +30,13 @@ class Cell:
             + ":"
             + str(self.candidates.candidates)
             + ")"
-        ) 
+        )
 
-    def compare(self, other:Cell) -> bool: 
-        if self.row == other.row and self.col == other.col and self.block == other.block:
+    def compare(self, other: Cell) -> bool:
+        if (
+            self.row == other.row
+            and self.col == other.col
+            and self.block == other.block
+        ):
             return True
         return False
