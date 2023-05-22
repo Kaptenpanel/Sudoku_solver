@@ -3,7 +3,7 @@
 from cell import Cell
 from boardd import (
     Boardcheckpoint,
-    print_solution,
+    color_board,
     makeboard,
     make_board2,
     fetch_cells,
@@ -71,4 +71,4 @@ unsolvable = (
 board = makeboard(hard_case2)
 solution = solve_board(board)
 
-print_solution(solution)
+print(color_board(solution))

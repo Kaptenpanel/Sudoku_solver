@@ -203,9 +203,8 @@ def color_board(board: list[Cell]) -> str:
                 case _:
                     color = Back.RESET
 
-        result = print(color + "." + Back.RESET if v == 0 else v, end=" ")
+        print(color + "." + Back.RESET if v == 0 else v, end=" ")
 
-        return result
 
 
 def get_all_candidates_for_empty_cells(board: list[Cell]) -> dict[Cell, list[int]]:
