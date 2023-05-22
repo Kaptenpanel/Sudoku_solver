@@ -1,5 +1,3 @@
-# new sudoku file
-
 from cell import Cell
 from boardd import (
     Boardcheckpoint,
