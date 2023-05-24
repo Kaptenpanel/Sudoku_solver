@@ -71,7 +71,7 @@ def parsecellvalue(char: str) -> int:
     raise ValueError(f"I am not expecting somethign like: {char}")
 
 
-def make_board2 (
+def make_board2(
     board: list[Cell], empty_cells: list[Cell], cell_i_tried: Cell
 ) -> Boardcheckpoint:
     s_board = Boardcheckpoint(board, empty_cells, cell_i_tried, [])
@@ -158,7 +158,6 @@ def print_solution(solution: Union[list[Cell], str]):
         print_board(solution)
 
 
-
 def fetch_cells(board: list[Cell]) -> list[Cell]:
     empty_cells = find_all_empty_cells(board)
     for empty_cell in empty_cells:
@@ -206,8 +205,7 @@ def color_board(board: list[Cell]) -> str:
         print(color + "." + Back.RESET if v == 0 else v, end=" ")
 
 
-def create_string_for_board_output(board:list[Cell]):
-
+def create_string_for_board_output(board: list[Cell]):
     output = ""
 
     for i in range(81):
@@ -225,13 +223,15 @@ def create_string_for_board_output(board:list[Cell]):
             if not i % 27:
                 output += "------ | ------ | ------ |<br>" + "| "
         if item in board:
-            output += str(num) + " "
+            if num != 0:
+                output += str(num) + " "
+            elif num == 0:
+                output += " . "
+
         if i == 80:
             output += " | "
 
     return output
-        
-
 
 
 def get_all_candidates_for_empty_cells(board: list[Cell]) -> dict[Cell, list[int]]:
@@ -250,5 +250,3 @@ def are_candidates_valid(empty_cells: list[Cell]) -> bool:
         if len(empty_cell.candidates.candidates) == 0:
             return False
     return True
-
-

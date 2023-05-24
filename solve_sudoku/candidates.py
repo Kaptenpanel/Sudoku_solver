@@ -1,4 +1,3 @@
-
 class Candidates:
     """this contains the candidates for one cell"""
 
