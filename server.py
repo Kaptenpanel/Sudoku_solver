@@ -1,8 +1,8 @@
 from flask import Flask, request
 import sys, os
 sys.path.append(os.getcwd() + '/solve_sudoku') 
-from solve_sudoku.sudoku_solver import solve_board
-from solve_sudoku.boardd import makeboard
+from sudoku_solver import solve_board
+from boardd import makeboard, create_string_for_board_output
 
 
 app = Flask(__name__)
@@ -29,7 +29,7 @@ def show_board():
 @app.route("/solve")
 def solve():
     args = request.args
-    makeboard('78921689471290471289739018301')
-    solve_board
-
-    return args["sudoku"]
+    erm = makeboard(args["sudoku"])
+    hehe = solve_board(erm)
+    yeah = create_string_for_board_output(hehe)
+    return yeah

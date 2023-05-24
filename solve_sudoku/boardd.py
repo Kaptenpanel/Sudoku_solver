@@ -206,6 +206,26 @@ def color_board(board: list[Cell]) -> str:
         print(color + "." + Back.RESET if v == 0 else v, end=" ")
 
 
+def create_string_for_board_output(board:list[Cell]):
+
+    output = ""
+
+    for i in range(81):
+        num = board[i].value
+        item = board[i]
+        if item in board:
+            output += str(num)
+        if i != 0:
+            if not i % 3 or not i % 6:
+                output += " | "
+        if i != 0:
+            if not i % 9:
+                output += "\n"
+
+    return output
+        
+
+
 
 def get_all_candidates_for_empty_cells(board: list[Cell]) -> dict[Cell, list[int]]:
     empty_cells = find_all_empty_cells(board)
