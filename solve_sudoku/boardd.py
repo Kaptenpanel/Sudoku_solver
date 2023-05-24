@@ -213,14 +213,21 @@ def create_string_for_board_output(board:list[Cell]):
     for i in range(81):
         num = board[i].value
         item = board[i]
-        if item in board:
-            output += str(num)
+        if i == 0:
+            output += "| "
         if i != 0:
             if not i % 3 or not i % 6:
                 output += " | "
         if i != 0:
             if not i % 9:
-                output += "\n"
+                output += "<br>" + "| "
+        if i != 0:
+            if not i % 27:
+                output += "------ | ------ | ------ |<br>" + "| "
+        if item in board:
+            output += str(num) + " "
+        if i == 80:
+            output += " | "
 
     return output
         
