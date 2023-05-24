@@ -3,4 +3,3 @@ class Candidates:
 
     def __init__(self, candidates: list[int]):
         self.candidates = candidates
-        pass

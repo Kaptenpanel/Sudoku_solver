@@ -1,8 +1,8 @@
 from __future__ import annotations
 import copy
 from cell import Cell
-from typing import Literal, Type, Union
-from colorama import Fore, Back, Style
+from typing import Union
+from colorama import Back
 from candidates import Candidates
 
 
@@ -139,8 +139,7 @@ def find_empty_cell(board: list[Cell]) -> Union[Cell, bool]:
         cell = board[i]
         if cell.value == 0:
             return cell
-    else:
-        return True
+    return True
 
 
 def find_all_empty_cells(board: list[Cell]) -> list[Cell]:
@@ -156,7 +155,7 @@ def print_solution(solution: Union[list[Cell], str]):
     if type(solution) == list[Cell]:
         color_board(solution)
     else:
-        print(solution)
+        print_board(solution)
 
 
 def fetch_cells(board: list[Cell]) -> list[Cell]:
@@ -178,7 +177,7 @@ def find_lowest_number_of_candidates(empty_cells: list[Cell]) -> Cell:
     raise ValueError("something bad happened")
 
 
-def color_board(board: list[Cell]):
+def color_board(board: list[Cell]) -> str:
     dict_of_cells = get_all_candidates_for_empty_cells(board)
     if dict_of_cells == None:
         print_board(board)
@@ -204,6 +203,35 @@ def color_board(board: list[Cell]):
                     color = Back.RESET
 
         print(color + "." + Back.RESET if v == 0 else v, end=" ")
+
+
+def create_string_for_board_output(board: list[Cell]):
+    output = ""
+
+    for i in range(81):
+        num = board[i].value
+        item = board[i]
+        if i == 0:
+            output += "| "
+        if i != 0:
+            if not i % 3 or not i % 6:
+                output += " | "
+        if i != 0:
+            if not i % 9:
+                output += "<br>" + "| "
+        if i != 0:
+            if not i % 27:
+                output += "----- | ----- | ----- |<br>" + "| "
+        if item in board:
+            if num != 0:
+                output += str(num) + " "
+            elif num == 0:
+                output += " . "
+
+        if i == 80:
+            output += " | "
+
+    return output
 
 
 def get_all_candidates_for_empty_cells(board: list[Cell]) -> dict[Cell, list[int]]:
