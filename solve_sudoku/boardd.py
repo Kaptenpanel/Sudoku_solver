@@ -221,7 +221,7 @@ def create_string_for_board_output(board: list[Cell]):
                 output += "<br>" + "| "
         if i != 0:
             if not i % 27:
-                output += "------ | ------ | ------ |<br>" + "| "
+                output += "----- | ----- | ----- |<br>" + "| "
         if item in board:
             if num != 0:
                 output += str(num) + " "
