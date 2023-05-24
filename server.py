@@ -19,18 +19,20 @@ def show_board():
     args = request.args
     board = makeboard(args["sudoku"])
     output = create_string_for_board_output(board)
-    return (output,"""style="font-family:monospace" """,
-        """
+    session['my_var'] = board
+    return (
+        f"""
     <form action="/solve">
+    <p>{output}style=font-family:monospace;</p><br>
     <input type="submit" value="Solve the board">
+    <input
 </form><br>"""
     )
 
 
 @app.route("/solve")
 def solve():
-    args=request.args
-    board = makeboard(args["sudoku"])
+    board = session.get('my_var', None)
     hehe = solve_board(board)
     yeah = create_string_for_board_output(hehe)
     return yeah
