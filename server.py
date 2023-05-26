@@ -4,6 +4,7 @@ import sys, os
 sys.path.append(os.getcwd() + "/solve_sudoku")
 from sudoku_solver import solve_board
 from boardd import makeboard, create_string_for_board_output
+from import_requests import fetch_board
 
 
 app = Flask(__name__)
@@ -18,17 +19,17 @@ def hello_world():
 
 @app.route("/see-board")
 def show_board():
-    args = request.args
-    board = makeboard(args["sudoku"])
+    board_str = fetch_board()
+    board = makeboard(board_str)
     output = create_string_for_board_output(board)
-    session['my_var'] = args["sudoku"]
+    session['my_var'] = board_str
+
     return (
         f"""
+        <p>you can reload the page if you want to see a new board.<br><br></p> 
     <form action="/solve">
     <p>{output}<style>p{{font-family: monospace;}}</style></p><br>
     <input type="submit" value="Solve the board">
-    <p>Now I can go home :) </p> <br>
-    <input type="text"
 </form><br>"""
     )
 
@@ -39,4 +40,7 @@ def solve():
     erm = makeboard(board)
     hehe = solve_board(erm)
     yeah = create_string_for_board_output(hehe)
-    return f"""<p>{yeah}<style>p{{font-family: monospace;}}</style></p><br>"""
+    return f"""
+    <p> Here is your solved board :)<br><br></p>
+    
+    <p>{yeah}<style>p{{font-family: monospace;}}</style></p><br>"""

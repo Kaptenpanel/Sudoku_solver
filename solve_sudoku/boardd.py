@@ -218,7 +218,7 @@ def create_string_for_board_output(board: list[Cell]):
                 output += " | "
         if i != 0:
             if not i % 9:
-                output += "<br>" + "| "
+                output += "<br>" + " | "
         if i != 0:
             if not i % 27:
                 output += "----- | ----- | ----- |<br>" + "| "

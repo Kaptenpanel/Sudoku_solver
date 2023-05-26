@@ -5,7 +5,10 @@ from boardd import (
     fetch_cells,
     find_lowest_number_of_candidates,
     are_candidates_valid,
+    makeboard,
+    color_board
 )
+from import_requests import fetch_board
 
 
 def solve_board(board: list[Cell]):
@@ -40,6 +43,7 @@ def solve_board(board: list[Cell]):
             good_cell.value = good_cell.candidates.candidates[0]
             saved_board.attempts.append(good_cell.value)
             saved_boards.append(saved_board)
+
 
 
 if __name__ == "__main__":
