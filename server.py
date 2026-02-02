@@ -19,9 +19,10 @@ def hello_world():
 @app.route("/see-board")
 def show_board():
     args = request.args
-    board = makeboard(args["sudoku"])
+    board_str = args["sudoku"].replace(" ", "")
+    board = makeboard(board_str)
     output = create_string_for_board_output(board)
-    session['my_var'] = args["sudoku"]
+    session['my_var'] = board_str
     return (
         f"""
     <form action="/solve">
@@ -40,3 +41,6 @@ def solve():
     hehe = solve_board(erm)
     yeah = create_string_for_board_output(hehe)
     return f"""<p>{yeah}<style>p{{font-family: monospace;}}</style></p><br>"""
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5001)
